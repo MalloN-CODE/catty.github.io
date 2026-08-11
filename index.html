@@ -20,7 +20,6 @@
     --orange-light: #f9dfbd;
     --brown: #76543c;
     --pink: #efb6b6;
-    --green: #8ca47d;
 }
 
 * {
@@ -38,6 +37,15 @@ body {
     color: var(--black);
     font-family: "Inter", "Noto Sans JP", sans-serif;
     overflow-x: hidden;
+
+    /* 肉球カーソル */
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='25' font-size='24'%3E🐾%3C/text%3E%3C/svg%3E") 8 8, auto;
+}
+
+a,
+button,
+.research-item {
+    cursor: pointer;
 }
 
 a {
@@ -45,16 +53,96 @@ a {
     text-decoration: none;
 }
 
-/* ==============================
-   NAVIGATION
-============================== */
+
+/* =====================================================
+   背景の猫シルエット
+===================================================== */
+
+.background-cats {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-cat {
+    position: absolute;
+    color: var(--orange);
+    opacity: .045;
+    font-size: 220px;
+    animation: backgroundCat 28s linear infinite;
+}
+
+.bg-cat:nth-child(1) {
+    left: -100px;
+    top: 15%;
+    animation-duration: 32s;
+}
+
+.bg-cat:nth-child(2) {
+    right: -100px;
+    top: 55%;
+    font-size: 320px;
+    animation-duration: 40s;
+    animation-delay: -15s;
+}
+
+.bg-cat:nth-child(3) {
+    left: 25%;
+    top: 75%;
+    font-size: 150px;
+    animation-duration: 35s;
+    animation-delay: -8s;
+}
+
+@keyframes backgroundCat {
+
+    0% {
+        transform:
+            translate(0,0)
+            rotate(-8deg);
+    }
+
+    25% {
+        transform:
+            translate(80px,-30px)
+            rotate(5deg);
+    }
+
+    50% {
+        transform:
+            translate(150px,20px)
+            rotate(10deg);
+    }
+
+    75% {
+        transform:
+            translate(60px,40px)
+            rotate(-5deg);
+    }
+
+    100% {
+        transform:
+            translate(0,0)
+            rotate(-8deg);
+    }
+}
+
+
+/* =====================================================
+   NAV
+===================================================== */
 
 nav {
     position: fixed;
+
     top: 0;
     left: 0;
+
     width: 100%;
     height: 72px;
+
     padding: 0 5vw;
 
     display: flex;
@@ -62,6 +150,7 @@ nav {
     justify-content: space-between;
 
     background: rgba(255,250,243,.82);
+
     backdrop-filter: blur(14px);
 
     border-bottom: 1px solid rgba(222,214,202,.7);
@@ -88,7 +177,9 @@ nav {
     gap: 30px;
 
     font-family: "DM Mono", monospace;
+
     font-size: 10px;
+
     letter-spacing: .08em;
 }
 
@@ -101,12 +192,13 @@ nav {
 }
 
 
-/* ==============================
+/* =====================================================
    HERO
-============================== */
+===================================================== */
 
 .hero {
     min-height: 100vh;
+
     padding: 140px 5vw 70px;
 
     display: flex;
@@ -114,17 +206,20 @@ nav {
     justify-content: space-between;
 
     position: relative;
+
     overflow: hidden;
 }
 
 .hero::before {
     content: "CAT";
+
     position: absolute;
 
     right: -5vw;
     top: 15vh;
 
     font-size: 25vw;
+
     font-weight: 800;
 
     color: rgba(233,154,82,.055);
@@ -134,11 +229,13 @@ nav {
 
 .hero-top {
     display: flex;
+
     justify-content: space-between;
-    align-items: flex-start;
 
     font-family: "DM Mono", monospace;
+
     font-size: 10px;
+
     letter-spacing: .12em;
 }
 
@@ -148,32 +245,41 @@ nav {
 
 .hero-title {
     margin-top: 10vh;
+
     position: relative;
+
     z-index: 2;
 }
 
 .hero-title h1 {
     font-size: clamp(72px, 13vw, 190px);
+
     line-height: .82;
+
     letter-spacing: -.08em;
+
     font-weight: 800;
 }
 
 .hero-title .outline {
     color: transparent;
+
     -webkit-text-stroke: 1.5px var(--black);
 }
 
 .hero-subtitle {
     margin-top: 30px;
 
-    font-size: clamp(18px, 2vw, 28px);
+    font-size: clamp(18px,2vw,28px);
+
     color: var(--brown);
 }
 
 .hero-bottom {
     display: flex;
+
     justify-content: space-between;
+
     align-items: flex-end;
 
     margin-top: 80px;
@@ -183,6 +289,7 @@ nav {
     max-width: 480px;
 
     font-size: 15px;
+
     line-height: 2;
 }
 
@@ -192,69 +299,74 @@ nav {
 
 .scroll {
     font-family: "DM Mono", monospace;
+
     font-size: 10px;
+
     letter-spacing: .15em;
-
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.scroll::after {
-    content: "🐾";
-    font-size: 20px;
 }
 
 
-/* ==============================
-   FLOATING PAWS
-============================== */
+/* =====================================================
+   横切る猫
+===================================================== */
 
-.paw {
-    position: absolute;
+.walking-cat {
+    position: fixed;
 
-    color: var(--orange);
-    opacity: .3;
+    left: -180px;
 
-    animation: float 4s ease-in-out infinite;
+    bottom: 12%;
+
+    font-size: 90px;
+
+    z-index: 900;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,.08));
 }
 
-.paw1 {
-    right: 16%;
-    top: 35%;
-    font-size: 35px;
+.walking-cat.walk {
+    animation: catWalk 13s linear forwards;
 }
 
-.paw2 {
-    right: 10%;
-    top: 48%;
-    font-size: 18px;
+@keyframes catWalk {
 
-    animation-delay: 1s;
-}
+    0% {
+        left: -180px;
+        opacity: 0;
+        transform: scaleX(1);
+    }
 
-.paw3 {
-    right: 24%;
-    top: 55%;
-    font-size: 13px;
+    5% {
+        opacity: 1;
+    }
 
-    animation-delay: 2s;
-}
-
-@keyframes float {
-    0%,100% {
-        transform: translateY(0) rotate(-10deg);
+    48% {
+        transform: scaleX(1);
     }
 
     50% {
-        transform: translateY(-15px) rotate(10deg);
+        transform: scaleX(-1);
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        left: calc(100vw + 180px);
+        opacity: 0;
+        transform: scaleX(-1);
     }
 }
 
 
-/* ==============================
-   COMMON SECTION
-============================== */
+/* =====================================================
+   SECTION
+===================================================== */
 
 section {
     padding: 150px 5vw;
@@ -262,48 +374,50 @@ section {
 
 .section-header {
     display: grid;
+
     grid-template-columns: 25% 75%;
 
     border-top: 1px solid var(--line);
 
     padding-top: 18px;
+
     margin-bottom: 100px;
 }
 
 .section-number {
     font-family: "DM Mono", monospace;
+
     font-size: 10px;
+
     color: var(--gray);
 }
 
 .section-title {
-    font-size: clamp(45px, 6vw, 90px);
+    font-size: clamp(45px,6vw,90px);
+
     line-height: .95;
+
     letter-spacing: -.06em;
 }
 
-.section-title small {
-    font-family: "DM Mono", monospace;
-    font-size: 13px;
-    color: var(--orange);
-    letter-spacing: .05em;
-}
 
-
-/* ==============================
+/* =====================================================
    ABOUT
-============================== */
+===================================================== */
 
 .about-grid {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
 
     gap: 10vw;
 }
 
 .about-lead {
-    font-size: clamp(25px, 3vw, 43px);
+    font-size: clamp(25px,3vw,43px);
+
     line-height: 1.3;
+
     letter-spacing: -.04em;
 }
 
@@ -315,6 +429,7 @@ section {
     max-width: 500px;
 
     font-size: 15px;
+
     line-height: 2;
 }
 
@@ -326,11 +441,13 @@ section {
     background: var(--paper);
 
     border: 1px solid var(--line);
+
     border-radius: 12px;
 }
 
 .info-row {
     display: flex;
+
     justify-content: space-between;
 
     padding: 12px 0;
@@ -344,14 +461,10 @@ section {
     border-bottom: none;
 }
 
-.info-row span:first-child {
-    color: var(--gray);
-}
 
-
-/* ==============================
-   CAT PROFILE
-============================== */
+/* =====================================================
+   CATTY
+===================================================== */
 
 .cat-section {
     background: #fff1df;
@@ -359,14 +472,13 @@ section {
 
 .cat-profile {
     display: grid;
+
     grid-template-columns: 40% 60%;
+
     align-items: center;
 
     gap: 8vw;
 }
-
-
-/* CAT CSS ILLUSTRATION */
 
 .cat {
     width: 260px;
@@ -389,10 +501,6 @@ section {
     background: #d99352;
 
     border-radius: 48% 48% 45% 45%;
-
-    box-shadow:
-        inset -8px -10px 0 rgba(120,70,30,.08),
-        0 20px 40px rgba(100,60,30,.12);
 }
 
 .cat-ear {
@@ -529,7 +637,8 @@ section {
 }
 
 .cat-profile h3 {
-    font-size: clamp(40px, 5vw, 75px);
+    font-size: clamp(40px,5vw,75px);
+
     letter-spacing: -.07em;
 
     margin-bottom: 25px;
@@ -539,6 +648,7 @@ section {
     max-width: 550px;
 
     font-size: 15px;
+
     line-height: 2;
 }
 
@@ -546,6 +656,7 @@ section {
     display: inline-flex;
 
     align-items: center;
+
     gap: 10px;
 
     margin-top: 30px;
@@ -557,45 +668,23 @@ section {
     border-radius: 999px;
 
     font-family: "DM Mono", monospace;
+
     font-size: 10px;
 }
 
-.cat-status::before {
-    content: "";
 
-    width: 8px;
-    height: 8px;
-
-    background: #7eb77a;
-
-    border-radius: 50%;
-}
-
-
-/* ==============================
+/* =====================================================
    RESEARCH
-============================== */
+===================================================== */
 
 .research {
     background: var(--black);
+
     color: var(--bg);
 
     position: relative;
 
     overflow: hidden;
-}
-
-.research::after {
-    content: "🐈";
-
-    position: absolute;
-
-    right: -20px;
-    bottom: -30px;
-
-    font-size: 250px;
-
-    opacity: .04;
 }
 
 .research .section-header {
@@ -606,21 +695,29 @@ section {
     border-top: 1px solid #444;
 
     position: relative;
+
     z-index: 2;
 }
 
+
+/* =====================================================
+   Research Card
+===================================================== */
+
 .research-item {
-    padding: 50px 0;
+    position: relative;
+
+    padding: 45px 0;
 
     border-bottom: 1px solid #444;
 
     display: grid;
 
-    grid-template-columns: 15% 55% 30%;
+    grid-template-columns: 15% 60% 25%;
 
     align-items: center;
 
-    transition: .4s;
+    transition: .45s;
 }
 
 .research-item:hover {
@@ -633,13 +730,13 @@ section {
 .research-id {
     font-family: "DM Mono", monospace;
 
-    font-size: 11px;
+    font-size: 10px;
 
     color: #777;
 }
 
 .research-title {
-    font-size: clamp(25px, 3vw, 43px);
+    font-size: clamp(25px,3vw,43px);
 
     letter-spacing: -.045em;
 
@@ -668,16 +765,116 @@ section {
     font-family: "DM Mono", monospace;
 
     font-size: 9px;
-
-    letter-spacing: .08em;
 }
 
 
-/* ==============================
+/* =====================================================
+   猫が丸まるアイコン
+===================================================== */
+
+.research-cat {
+
+    position: absolute;
+
+    right: 30px;
+    top: 50%;
+
+    transform: translateY(-50%) scale(0);
+
+    font-size: 42px;
+
+    opacity: 0;
+
+    transition: .45s;
+
+    pointer-events: none;
+}
+
+.research-item.open .research-cat {
+
+    transform:
+        translateY(-50%)
+        scale(1)
+        rotate(-8deg);
+
+    opacity: 1;
+}
+
+
+/* =====================================================
+   展開される研究内容
+===================================================== */
+
+.research-detail {
+
+    grid-column: 2 / 4;
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transition:
+        max-height .6s ease,
+        opacity .4s ease,
+        padding .5s ease;
+
+    padding: 0;
+}
+
+.research-item.open .research-detail {
+
+    max-height: 300px;
+
+    opacity: 1;
+
+    padding:
+        35px
+        80px
+        10px 0;
+}
+
+.detail-inner {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 50px;
+
+    border-top: 1px dashed #555;
+
+    padding-top: 30px;
+}
+
+.detail-inner h4 {
+
+    color: var(--orange);
+
+    font-size: 11px;
+
+    font-family: "DM Mono", monospace;
+
+    margin-bottom: 12px;
+}
+
+.detail-inner p {
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    line-height: 1.9;
+}
+
+
+/* =====================================================
    OBSERVATION
-============================== */
+===================================================== */
 
 .observation-grid {
+
     display: grid;
 
     grid-template-columns: repeat(3,1fr);
@@ -686,6 +883,7 @@ section {
 }
 
 .observation {
+
     min-height: 330px;
 
     padding: 28px;
@@ -697,15 +895,20 @@ section {
     border-radius: 12px;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: space-between;
 
     transition: .3s;
 }
 
 .observation:hover {
+
     transform: translateY(-7px);
-    box-shadow: 0 15px 35px rgba(80,50,20,.08);
+
+    box-shadow:
+        0 15px 35px rgba(80,50,20,.08);
 }
 
 .observation-icon {
@@ -713,6 +916,7 @@ section {
 }
 
 .observation-number {
+
     font-family: "DM Mono", monospace;
 
     font-size: 10px;
@@ -721,6 +925,7 @@ section {
 }
 
 .observation h3 {
+
     font-size: 27px;
 
     letter-spacing: -.04em;
@@ -729,6 +934,7 @@ section {
 }
 
 .observation p {
+
     color: var(--gray);
 
     font-size: 13px;
@@ -737,15 +943,17 @@ section {
 }
 
 
-/* ==============================
+/* =====================================================
    METHODS
-============================== */
+===================================================== */
 
 .methods {
+
     background: #f3eee6;
 }
 
 .methods-grid {
+
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -758,6 +966,7 @@ section {
 }
 
 .method {
+
     min-height: 240px;
 
     padding: 32px;
@@ -765,11 +974,14 @@ section {
     background: var(--paper);
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: space-between;
 }
 
 .method-number {
+
     font-family: "DM Mono", monospace;
 
     font-size: 10px;
@@ -778,12 +990,14 @@ section {
 }
 
 .method h3 {
+
     font-size: 30px;
 
     letter-spacing: -.04em;
 }
 
 .method p {
+
     max-width: 420px;
 
     color: var(--gray);
@@ -794,21 +1008,24 @@ section {
 }
 
 
-/* ==============================
-   BIG STATEMENT
-============================== */
+/* =====================================================
+   STATEMENT
+===================================================== */
 
 .statement {
+
     min-height: 85vh;
 
     display: flex;
+
     align-items: center;
 
     position: relative;
 }
 
 .statement h2 {
-    font-size: clamp(48px, 8vw, 125px);
+
+    font-size: clamp(48px,8vw,125px);
 
     line-height: .9;
 
@@ -816,10 +1033,12 @@ section {
 }
 
 .statement .orange {
+
     color: var(--orange);
 }
 
 .statement-cat {
+
     position: absolute;
 
     right: 8%;
@@ -831,6 +1050,7 @@ section {
 }
 
 @keyframes jump {
+
     0%,100% {
         transform: translateY(0);
     }
@@ -841,23 +1061,23 @@ section {
 }
 
 
-/* ==============================
+/* =====================================================
    FOOTER
-============================== */
+===================================================== */
 
 footer {
+
     padding: 40px 5vw;
 
     border-top: 1px solid var(--line);
 
     display: flex;
+
     justify-content: space-between;
 
     font-family: "DM Mono", monospace;
 
     font-size: 10px;
-
-    letter-spacing: .08em;
 }
 
 .footer-cat {
@@ -865,19 +1085,18 @@ footer {
 }
 
 
-/* ==============================
+/* =====================================================
    MOBILE
-============================== */
+===================================================== */
 
 @media(max-width:700px) {
 
     nav {
         height: 62px;
-        padding: 0 5vw;
     }
 
     .nav-links {
-        gap: 12px;
+        gap: 10px;
         font-size: 8px;
     }
 
@@ -885,20 +1104,8 @@ footer {
         padding-top: 110px;
     }
 
-    .hero-top {
-        font-size: 8px;
-    }
-
-    .hero-title {
-        margin-top: 15vh;
-    }
-
     .hero-title h1 {
         font-size: 20vw;
-    }
-
-    .hero-title .outline {
-        -webkit-text-stroke: 1px var(--black);
     }
 
     .hero-bottom {
@@ -938,6 +1145,7 @@ footer {
     }
 
     .research-item {
+
         grid-template-columns: 1fr;
 
         gap: 18px;
@@ -946,27 +1154,64 @@ footer {
     }
 
     .research-item:hover {
+
         padding-left: 0;
         padding-right: 0;
     }
 
+    .research-detail {
+
+        grid-column: 1;
+    }
+
+    .research-item.open .research-detail {
+
+        padding:
+            30px
+            0
+            0;
+    }
+
+    .detail-inner {
+
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .research-cat {
+
+        display: none;
+    }
+
     .observation-grid {
+
         grid-template-columns: 1fr;
     }
 
     .methods-grid {
+
         grid-template-columns: 1fr;
     }
 
     .statement-cat {
+
         right: 5%;
         bottom: 8%;
+
         font-size: 45px;
     }
 
     footer {
+
         flex-direction: column;
+
         gap: 15px;
+    }
+
+    body {
+
+        cursor: auto;
     }
 }
 </style>
@@ -976,30 +1221,61 @@ footer {
 <body>
 
 
-<!-- ==============================
+<!-- =====================================================
+     BACKGROUND CATS
+===================================================== -->
+
+<div class="background-cats">
+
+    <div class="bg-cat">🐈</div>
+    <div class="bg-cat">🐈</div>
+    <div class="bg-cat">🐈</div>
+
+</div>
+
+
+<!-- =====================================================
+     WALKING CAT
+===================================================== -->
+
+<div id="walkingCat" class="walking-cat">
+    🐈
+</div>
+
+
+<!-- =====================================================
      NAV
-============================== -->
+===================================================== -->
 
 <nav>
 
     <a href="#" class="logo">
+
         <span class="logo-icon">🐈</span>
+
         Catty Research
+
     </a>
 
+
     <div class="nav-links">
+
         <a href="#about">ABOUT</a>
+
         <a href="#catty">CATTY</a>
+
         <a href="#research">RESEARCH</a>
+
         <a href="#observation">OBSERVATION</a>
+
     </div>
 
 </nav>
 
 
-<!-- ==============================
+<!-- =====================================================
      HERO
-============================== -->
+===================================================== -->
 
 <header class="hero">
 
@@ -1020,12 +1296,20 @@ footer {
     <div class="hero-title">
 
         <h1>
+
             CATTY<br>
-            <span class="outline">RESEARCH</span>
+
+            <span class="outline">
+                RESEARCH
+            </span>
+
         </h1>
 
+
         <div class="hero-subtitle">
+
             猫を観察し、猫を理解する。🐾
+
         </div>
 
     </div>
@@ -1034,28 +1318,30 @@ footer {
     <div class="hero-bottom">
 
         <p class="hero-description">
-            本研究では、<strong>Catty</strong>を対象として、
+
+            本研究では、
+            <strong>Catty</strong>を対象として、
             日常行動・睡眠・食事・コミュニケーションなどを
-            継続的に観察し、猫という生き物の行動特性を探究する。
+            継続的に観察し、
+            猫という生き物の行動特性を探究する。
+
         </p>
 
+
         <div class="scroll">
-            SCROLL TO OBSERVE
+
+            SCROLL TO OBSERVE ↓
+
         </div>
 
     </div>
 
-
-    <div class="paw paw1">🐾</div>
-    <div class="paw paw2">🐾</div>
-    <div class="paw paw3">🐾</div>
-
 </header>
 
 
-<!-- ==============================
+<!-- =====================================================
      ABOUT
-============================== -->
+===================================================== -->
 
 <section id="about">
 
@@ -1066,9 +1352,10 @@ footer {
         </div>
 
         <h2 class="section-title">
+
             About<br>
-            the Research
-            <small>🐾</small>
+            the Research 🐾
+
         </h2>
 
     </div>
@@ -1079,7 +1366,9 @@ footer {
         <p class="about-lead">
 
             <span>Catty</span>を通して、<br>
+
             猫の行動と生態を<br>
+
             観察する。
 
         </p>
@@ -1091,7 +1380,9 @@ footer {
 
                 猫は非常に身近な存在でありながら、
                 その行動には多くの謎が残されています。
-                本研究では、一匹の猫「Catty」を長期的に観察し、
+
+                本研究では、
+                一匹の猫「Catty」を長期的に観察し、
                 日常生活の中に現れる特徴的な行動を記録します。
 
             </p>
@@ -1100,23 +1391,54 @@ footer {
             <div class="info-box">
 
                 <div class="info-row">
-                    <span>Research Subject</span>
-                    <strong>Catty</strong>
+
+                    <span>
+                        Research Subject
+                    </span>
+
+                    <strong>
+                        Catty
+                    </strong>
+
                 </div>
 
-                <div class="info-row">
-                    <span>Species</span>
-                    <strong>Felis catus</strong>
-                </div>
 
                 <div class="info-row">
-                    <span>Research Style</span>
-                    <strong>Long-term Observation</strong>
+
+                    <span>
+                        Species
+                    </span>
+
+                    <strong>
+                        Felis catus
+                    </strong>
+
                 </div>
 
+
                 <div class="info-row">
-                    <span>Status</span>
-                    <strong>Ongoing 🐾</strong>
+
+                    <span>
+                        Research Style
+                    </span>
+
+                    <strong>
+                        Long-term Observation
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong>
+                        Ongoing 🐾
+                    </strong>
+
                 </div>
 
             </div>
@@ -1128,9 +1450,9 @@ footer {
 </section>
 
 
-<!-- ==============================
+<!-- =====================================================
      CATTY
-============================== -->
+===================================================== -->
 
 <section id="catty" class="cat-section">
 
@@ -1149,14 +1471,18 @@ footer {
 
     <div class="cat-profile">
 
+
         <div class="cat">
 
             <div class="cat-ear left"></div>
+
             <div class="cat-ear right"></div>
+
 
             <div class="cat-head">
 
                 <div class="cat-eye left"></div>
+
                 <div class="cat-eye right"></div>
 
                 <div class="cat-nose"></div>
@@ -1164,8 +1490,11 @@ footer {
                 <div class="cat-mouth"></div>
 
                 <div class="whisker w1"></div>
+
                 <div class="whisker w2"></div>
+
                 <div class="whisker w3"></div>
+
                 <div class="whisker w4"></div>
 
             </div>
@@ -1176,23 +1505,35 @@ footer {
         <div>
 
             <h3>
+
                 Hello,<br>
                 I'm Catty.
+
             </h3>
 
+
             <p>
+
                 本研究の中心的な研究対象。
+
                 毎日の行動を記録されながらも、
                 本人は研究されていることを知らない。
+
                 <br><br>
+
                 食事の時間には非常に正確で、
                 気が向いたときだけ研究者に協力する。
+
                 なお、睡眠中の観察については
                 かなり協力的である。
+
             </p>
 
+
             <div class="cat-status">
+
                 ● CURRENTLY BEING OBSERVED
+
             </div>
 
         </div>
@@ -1202,9 +1543,9 @@ footer {
 </section>
 
 
-<!-- ==============================
+<!-- =====================================================
      RESEARCH
-============================== -->
+===================================================== -->
 
 <section id="research" class="research">
 
@@ -1215,7 +1556,10 @@ footer {
         </div>
 
         <h2 class="section-title">
-            Research<br>Projects
+
+            Research<br>
+            Projects
+
         </h2>
 
     </div>
@@ -1224,133 +1568,375 @@ footer {
     <div class="research-list">
 
 
-        <div class="research-item">
+        <!-- RESEARCH 01 -->
+
+        <article class="research-item">
 
             <div class="research-id">
                 RESEARCH 01
             </div>
 
+
             <div>
 
                 <h3 class="research-title">
+
                     <span>Sleep</span><br>
                     Behavior
+
                 </h3>
 
+
                 <div class="tag">
-                    #SLEEP #REST #DAILY_PATTERN
+
+                    #SLEEP
+                    #REST
+                    #DAILY_PATTERN
+
                 </div>
 
             </div>
 
+
             <p class="research-description">
 
                 Cattyの睡眠時間、
-                睡眠場所、姿勢、時間帯などを記録し、
-                一日の行動パターンとの関係を分析する。
+                睡眠場所、姿勢、
+                時間帯などを記録。
+
+                <br><br>
+
+                <strong>
+                    CLICK TO EXPLORE →
+                </strong>
 
             </p>
 
-        </div>
+
+            <!-- 丸まる猫 -->
+
+            <div class="research-cat">
+                😴🐈
+            </div>
 
 
-        <div class="research-item">
+            <!-- 展開 -->
+
+            <div class="research-detail">
+
+                <div class="detail-inner">
+
+                    <div>
+
+                        <h4>
+                            RESEARCH QUESTION
+                        </h4>
+
+                        <p>
+                            Cattyは一日の中で
+                            どの時間帯に最も長く眠るのか。
+                            また、睡眠場所や姿勢には
+                            一定のパターンが存在するのか。
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <h4>
+                            OBSERVATION
+                        </h4>
+
+                        <p>
+                            午後から夕方にかけて
+                            睡眠時間が増加する傾向を確認。
+                            特に日当たりの良い場所を
+                            選択する頻度が高い。
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- RESEARCH 02 -->
+
+        <article class="research-item">
 
             <div class="research-id">
                 RESEARCH 02
             </div>
 
+
             <div>
 
                 <h3 class="research-title">
+
                     <span>Feeding</span><br>
                     Behavior
+
                 </h3>
 
+
                 <div class="tag">
-                    #FOOD #TIMING #PREFERENCE
+
+                    #FOOD
+                    #TIMING
+                    #PREFERENCE
+
                 </div>
 
             </div>
 
+
             <p class="research-description">
 
                 食事の時間、回数、
-                食べる速度、好みなどを観察。
-                食事に対する反応の変化を記録する。
+                食べる速度、
+                好みなどを観察。
+
+                <br><br>
+
+                <strong>
+                    CLICK TO EXPLORE →
+                </strong>
 
             </p>
 
-        </div>
+
+            <div class="research-cat">
+                🍚🐈
+            </div>
 
 
-        <div class="research-item">
+            <div class="research-detail">
+
+                <div class="detail-inner">
+
+                    <div>
+
+                        <h4>
+                            RESEARCH QUESTION
+                        </h4>
+
+                        <p>
+                            食事の時間をどの程度正確に
+                            記憶しているのか。
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <h4>
+                            OBSERVATION
+                        </h4>
+
+                        <p>
+                            食事予定時刻の前後になると
+                            研究者への接近頻度が増加する。
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- RESEARCH 03 -->
+
+        <article class="research-item">
 
             <div class="research-id">
                 RESEARCH 03
             </div>
 
+
             <div>
 
                 <h3 class="research-title">
+
                     <span>Human</span><br>
                     Interaction
+
                 </h3>
 
+
                 <div class="tag">
-                    #HUMAN #COMMUNICATION #SOCIAL
+
+                    #HUMAN
+                    #COMMUNICATION
+                    #SOCIAL
+
                 </div>
 
             </div>
 
+
             <p class="research-description">
 
-                鳴き声、視線、接近、距離の取り方など、
-                人間とのコミュニケーションに現れる
-                行動パターンを観察する。
+                鳴き声、視線、
+                接近、距離の取り方など、
+                人間との関係を観察。
+
+                <br><br>
+
+                <strong>
+                    CLICK TO EXPLORE →
+                </strong>
 
             </p>
 
-        </div>
+
+            <div class="research-cat">
+                🐈💭
+            </div>
 
 
-        <div class="research-item">
+            <div class="research-detail">
+
+                <div class="detail-inner">
+
+                    <div>
+
+                        <h4>
+                            RESEARCH QUESTION
+                        </h4>
+
+                        <p>
+                            Cattyはどのような方法で
+                            人間に要求を伝えているのか。
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <h4>
+                            OBSERVATION
+                        </h4>
+
+                        <p>
+                            視線、鳴き声、身体接触を
+                            組み合わせた複合的な
+                            コミュニケーションが観察される。
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- RESEARCH 04 -->
+
+        <article class="research-item">
 
             <div class="research-id">
                 RESEARCH 04
             </div>
 
+
             <div>
 
                 <h3 class="research-title">
+
                     <span>Environmental</span><br>
                     Preference
+
                 </h3>
 
+
                 <div class="tag">
-                    #SPACE #TEMPERATURE #COMFORT
+
+                    #SPACE
+                    #TEMPERATURE
+                    #COMFORT
+
                 </div>
 
             </div>
 
+
             <p class="research-description">
 
-                Cattyが好む場所、温度、
-                明るさ、家具などを記録し、
-                「猫にとって快適な環境」を考察する。
+                Cattyが好む場所、
+                温度、明るさ、
+                家具などを記録。
+
+                <br><br>
+
+                <strong>
+                    CLICK TO EXPLORE →
+                </strong>
 
             </p>
 
-        </div>
+
+            <div class="research-cat">
+                📦🐈
+            </div>
+
+
+            <div class="research-detail">
+
+                <div class="detail-inner">
+
+                    <div>
+
+                        <h4>
+                            RESEARCH QUESTION
+                        </h4>
+
+                        <p>
+                            Cattyが環境を選択する際に
+                            どの要素を重視するのか。
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <h4>
+                            OBSERVATION
+                        </h4>
+
+                        <p>
+                            新しく設置された箱、
+                            日当たりの良い場所、
+                            暖かい場所への選好が確認される。
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
 
     </div>
 
 </section>
 
 
-<!-- ==============================
+<!-- =====================================================
      OBSERVATION
-============================== -->
+===================================================== -->
 
 <section id="observation">
 
@@ -1361,8 +1947,10 @@ footer {
         </div>
 
         <h2 class="section-title">
+
             Daily<br>
             Observation
+
         </h2>
 
     </div>
@@ -1385,6 +1973,7 @@ footer {
 
             </div>
 
+
             <div>
 
                 <h3>
@@ -1392,9 +1981,12 @@ footer {
                 </h3>
 
                 <p>
+
                     本日の睡眠時間を記録。
+
                     午後になると活動量が低下し、
                     窓際で長時間休息する傾向を確認。
+
                 </p>
 
             </div>
@@ -1416,6 +2008,7 @@ footer {
 
             </div>
 
+
             <div>
 
                 <h3>
@@ -1423,9 +2016,12 @@ footer {
                 </h3>
 
                 <p>
+
                     食事の準備を始めると
                     約3秒で研究対象が出現。
+
                     高い再現性を確認。
+
                 </p>
 
             </div>
@@ -1447,6 +2043,7 @@ footer {
 
             </div>
 
+
             <div>
 
                 <h3>
@@ -1454,9 +2051,12 @@ footer {
                 </h3>
 
                 <p>
+
                     新しい箱を設置したところ、
                     研究対象は即座に箱へ侵入。
+
                     箱の価格との相関は認められない。
+
                 </p>
 
             </div>
@@ -1468,9 +2068,9 @@ footer {
 </section>
 
 
-<!-- ==============================
+<!-- =====================================================
      METHODS
-============================== -->
+===================================================== -->
 
 <section class="methods">
 
@@ -1481,8 +2081,10 @@ footer {
         </div>
 
         <h2 class="section-title">
+
             Research<br>
             Methods
+
         </h2>
 
     </div>
@@ -1502,9 +2104,11 @@ footer {
             </h3>
 
             <p>
+
                 日常生活における行動を
                 可能な限り自然な状態で観察し、
                 時刻・場所・行動を記録する。
+
             </p>
 
         </div>
@@ -1521,9 +2125,11 @@ footer {
             </h3>
 
             <p>
+
                 動画記録を用いて、
                 肉眼では捉えにくい細かな
                 行動変化を分析する。
+
             </p>
 
         </div>
@@ -1540,9 +2146,11 @@ footer {
             </h3>
 
             <p>
+
                 食事、睡眠、遊び、移動などを
-                日々記録し、長期的な
-                行動パターンを探索する。
+                日々記録し、
+                長期的な行動パターンを探索する。
+
             </p>
 
         </div>
@@ -1559,9 +2167,11 @@ footer {
             </h3>
 
             <p>
+
                 蓄積した観察データを整理し、
                 時間帯や環境条件と行動の関係を
                 定量的に検討する。
+
             </p>
 
         </div>
@@ -1571,42 +2181,264 @@ footer {
 </section>
 
 
-<!-- ==============================
+<!-- =====================================================
      STATEMENT
-============================== -->
+===================================================== -->
 
 <section class="statement">
 
     <h2>
+
         UNDERSTANDING<br>
-        <span class="orange">CATS</span><br>
+
+        <span class="orange">
+            CATS
+        </span><br>
+
         ONE DAY AT A TIME.
+
     </h2>
 
+
     <div class="statement-cat">
+
         ฅ^•ﻌ•^ฅ
+
     </div>
 
 </section>
 
 
-<!-- ==============================
+<!-- =====================================================
      FOOTER
-============================== -->
+===================================================== -->
 
 <footer>
 
     <div>
+
         © 2026 CATTY RESEARCH
-        <span class="footer-cat">🐾</span>
+
+        <span class="footer-cat">
+            🐾
+        </span>
+
     </div>
 
+
     <div>
-        FELINE BEHAVIOR / OBSERVATION / DATA
+
+        FELINE BEHAVIOR /
+        OBSERVATION /
+        DATA
+
     </div>
 
 </footer>
 
+
+<script>
+
+/* =====================================================
+   Research Accordion
+===================================================== */
+
+const researchItems =
+    document.querySelectorAll(".research-item");
+
+
+researchItems.forEach(item => {
+
+    item.addEventListener("click", () => {
+
+        /*
+         * 他の研究を閉じる
+         */
+        researchItems.forEach(other => {
+
+            if (other !== item) {
+
+                other.classList.remove("open");
+
+            }
+
+        });
+
+
+        /*
+         * クリックした研究を開閉
+         */
+
+        item.classList.toggle("open");
+
+    });
+
+});
+
+
+/* =====================================================
+   Walking Cat
+===================================================== */
+
+const walkingCat =
+    document.getElementById("walkingCat");
+
+
+function makeCatWalk() {
+
+    /*
+     * アニメーションをリセット
+     */
+
+    walkingCat.classList.remove("walk");
+
+    void walkingCat.offsetWidth;
+
+    walkingCat.classList.add("walk");
+
+}
+
+
+/*
+ * 最初は少し待ってから登場
+ */
+
+setTimeout(() => {
+
+    makeCatWalk();
+
+}, 3500);
+
+
+/*
+ * その後ランダムな間隔で登場
+ */
+
+function scheduleCat() {
+
+    const delay =
+        12000 +
+        Math.random() * 18000;
+
+    setTimeout(() => {
+
+        makeCatWalk();
+
+        scheduleCat();
+
+    }, delay);
+
+}
+
+scheduleCat();
+
+
+/* =====================================================
+   Cattyをクリックすると猫が反応
+===================================================== */
+
+const cat =
+    document.querySelector(".cat");
+
+cat.addEventListener("click", () => {
+
+    cat.style.transform =
+        "scale(0.88) rotate(-4deg)";
+
+    setTimeout(() => {
+
+        cat.style.transform =
+            "scale(1)";
+
+    }, 350);
+
+});
+
+
+/* =====================================================
+   スクロール時に背景猫を少し動かす
+===================================================== */
+
+const bgCats =
+    document.querySelectorAll(".bg-cat");
+
+
+window.addEventListener("scroll", () => {
+
+    const scrollY =
+        window.scrollY;
+
+    bgCats.forEach((cat,index) => {
+
+        const speed =
+            (index + 1) * 0.015;
+
+        cat.style.marginTop =
+            `${scrollY * speed}px`;
+
+    });
+
+});
+
+
+/* =====================================================
+   クリック時の肉球エフェクト
+===================================================== */
+
+document.addEventListener("click", (event) => {
+
+    /*
+     * Researchカードなどで
+     * 画面を汚しすぎないように小さく表示
+     */
+
+    const paw =
+        document.createElement("div");
+
+    paw.textContent = "🐾";
+
+    paw.style.position = "fixed";
+
+    paw.style.left =
+        `${event.clientX - 10}px`;
+
+    paw.style.top =
+        `${event.clientY - 10}px`;
+
+    paw.style.fontSize = "20px";
+
+    paw.style.pointerEvents = "none";
+
+    paw.style.zIndex = "2000";
+
+    paw.style.opacity = "0.8";
+
+    paw.style.transition =
+        "all .7s ease";
+
+    document.body.appendChild(paw);
+
+
+    requestAnimationFrame(() => {
+
+        paw.style.transform =
+            "translateY(-25px) scale(.7)";
+
+        paw.style.opacity = "0";
+
+    });
+
+
+    setTimeout(() => {
+
+        paw.remove();
+
+    }, 700);
+
+});
+
+
+</script>
 
 </body>
 </html>
